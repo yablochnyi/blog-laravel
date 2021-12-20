@@ -29,7 +29,6 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
         Route::get('/{category}', 'ShowController')->name('admin.category.show');
         Route::get('/{category}/edit', 'EditController')->name('admin.category.edit');
         Route::patch('/{category}', 'UpdateController')->name('admin.category.update');
-        Route::delete('/{category}', 'DeleteController')->name('admin.category.delete');
     });
 
     Route::group(['namespace' => 'Tag', 'prefix' => 'tags'], function () {
