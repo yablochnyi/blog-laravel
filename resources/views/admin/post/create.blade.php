@@ -29,7 +29,8 @@
                         <form action="{{ route('admin.post.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group w-25">
-                                <input type="text" class="form-control" name="title" placeholder="Название поста" value="{{ old('title') }}">
+                                <input type="text" class="form-control" name="title" placeholder="Название поста"
+                                       value="{{ old('title') }}">
                                 @error('title')
                                 <div class="text-danger">Это поле необходимо заполнить</div>
                                 @enderror
@@ -46,7 +47,7 @@
                                     <div class="input-group">
                                         <div class="custom-file">
                                             <input type="file" class="custom-file-input" name="preview_image">
-                                            <label class="custom-file-label" >Выбрать изображение</label>
+                                            <label class="custom-file-label">Выбрать изображение</label>
                                         </div>
                                         <div class="input-group-append">
                                             <span class="input-group-text">Загрузить</span>
@@ -58,7 +59,7 @@
                                     <div class="input-group">
                                         <div class="custom-file">
                                             <input type="file" class="custom-file-input" name="main_image">
-                                            <label class="custom-file-label" >Выбрать изображение</label>
+                                            <label class="custom-file-label">Выбрать изображение</label>
                                         </div>
                                         <div class="input-group-append">
                                             <span class="input-group-text">Загрузить</span>
@@ -68,15 +69,27 @@
                                 <div class="form-group w-50">
                                     <label>Выберите категорию</label>
                                     <select name="category_id" class="form-control">
-                                    @foreach($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->title }}</option>
-                                    @endforeach
+                                        @foreach($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" class="btn btn-primary" value="Добавить">
-                            </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Тэги</label>
+                                        <select class="select2" name="tag_ids[]" multiple="multiple"
+                                                data-placeholder="Выберите тэги"
+                                                style="width: 100%;">
+                                            @foreach($tags as $tag)
+                                                <option
+                                                    {{ is_array( old('tag_ids')) && in_array($tag->id, old('tag_ids')) ? ' selected' : '' }} value="{{ $tag->id }}">{{$tag->title}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-primary" value="Добавить">
+                                </div>
                         </form>
                     </div>
                 </div>
