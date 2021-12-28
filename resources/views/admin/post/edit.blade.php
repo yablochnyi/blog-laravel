@@ -33,7 +33,7 @@
                                 <input type="text" class="form-control" name="title" placeholder="Название поста"
                                        value="{{ $post->title }}">
                                 @error('title')
-                                <div class="text-danger">Это поле необходимо заполнить</div>
+                                <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group">
@@ -41,7 +41,7 @@
                                    {{ $post->content }}
                                 </textarea>
                                 @error('content')
-                                <div class="text-danger">Это поле необходимо заполнить</div>
+                                <div class="text-danger">{{ $message }}</div>
                                 @enderror
                                 <div class="form-group w-50">
                                     <label for="exampleInputFile">Изображение превью</label>
