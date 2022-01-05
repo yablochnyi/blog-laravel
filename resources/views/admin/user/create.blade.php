@@ -50,6 +50,14 @@
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
+                            <div class="form-group w-50">
+                                <label>Выберите роль пользователя</label>
+                                <select name="role" class="form-control">
+                                    @foreach($roles as $id => $role)
+                                        <option value="{{ $id }}">{{ $role }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                             <input type="submit" class="btn btn-primary" value="Добавить">
                         </form>
                     </div>
