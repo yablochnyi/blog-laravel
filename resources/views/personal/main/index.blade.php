@@ -35,7 +35,7 @@
                             <div class="icon">
                                 <i class="fas fa-thumbs-up"></i>
                             </div>
-                            <a href="{{ route('admin.user.index') }}" class="small-box-footer">Подробнее <i
+                            <a href="{{ route('personal.liked.index') }}" class="small-box-footer">Подробнее <i
                                     class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                             <div class="icon">
                                 <i class="fas fa-thumbs-up"></i>
                             </div>
-                            <a href="{{ route('admin.post.index') }}" class="small-box-footer">Подробнее <i
+                            <a href="{{ route('personal.comment.index') }}" class="small-box-footer">Подробнее <i
                                     class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
