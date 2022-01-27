@@ -12,15 +12,37 @@
                             <div class="blog-post-thumbnail-wrapper">
                                 <img src="{{ 'storage/' . $post->preview_image }}" alt="blog post">
                             </div>
-                            <p class="blog-post-category">{{ $post->category->title }}</p>
+                            <div class="d-flex justify-content-between">
+                                <p class="blog-post-category">{{ $post->category->title }}</p>
+                                <form action="{{route('post.like.store', $post->id)}}" method="post">
+                                    @csrf
+                                    @auth()
+                                        <span>{{ $post->liked_users_count }}</span>
+                                        <button type="submit" class="border-0 bg-transparent">
+
+                                            @if(auth()->user()->likedPosts->contains($post->id))
+                                                <i class="fas fa-heart"></i>
+                                            @else
+                                                <i class="far fa-heart"></i>
+                                            @endif
+                                            @endauth
+                                        </button>
+                                        @guest()
+                                            <div>
+                                                <span>{{ $post->liked_users_count }}</span>
+                                                <i class="fas fa-heart"></i>
+                                            </div>
+                                        @endguest
+                                </form>
+                            </div>
                             <a href="{{ route('post.show', $post->id) }}" class="blog-post-permalink">
                                 <h6 class="blog-post-title">{{ $post->title }}</h6>
                             </a>
                         </div>
                     @endforeach
-                        <div class="mx-auto" style="margin-top: -80px">
-                            {{ $posts->links() }}
-                        </div>
+                    <div class="mx-auto" style="margin-top: -80px">
+                        {{ $posts->links() }}
+                    </div>
                 </div>
 
             </section>
@@ -33,12 +55,35 @@
                                     <div class="blog-post-thumbnail-wrapper">
                                         <img src="{{ 'storage/' . $post->preview_image }}" alt="blog post">
                                     </div>
-                                    <p class="blog-post-category">{{ $post->category->title }}</p>
+                                    <div class="d-flex justify-content-between">
+                                        <p class="blog-post-category">{{ $post->category->title }}</p>
+                                        <form action="{{route('post.like.store', $post->id)}}" method="post">
+                                            @csrf
+                                            @auth()
+                                                <span>{{ $post->liked_users_count }}</span>
+                                                <button type="submit" class="border-0 bg-transparent">
+
+                                                    @if(auth()->user()->likedPosts->contains($post->id))
+                                                        <i class="fas fa-heart"></i>
+                                                    @else
+                                                        <i class="far fa-heart"></i>
+                                                    @endif
+                                                    @endauth
+                                                </button>
+                                                @guest()
+                                                    <div>
+                                                        <span>{{ $post->liked_users_count }}</span>
+                                                        <i class="fas fa-heart"></i>
+                                                    </div>
+                                                @endguest
+                                        </form>
+                                    </div>
+
                                     <a href="{{ route('post.show', $post->id) }}" class="blog-post-permalink">
                                         <h6 class="blog-post-title">{{ $post->title }}</h6>
                                     </a>
                                 </div>
-                            @endforeach
+                        @endforeach
                     </section>
                 </div>
                 <div class="col-md-4 sidebar" data-aos="fade-left">

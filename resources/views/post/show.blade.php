@@ -33,39 +33,61 @@
                             @endforeach
                         </div>
                     </section>
+                    <section>
+                        <form action="{{route('post.like.store', $post->id)}}" method="post">
+                            @csrf
+                            @auth()
+                                <span>{{ $post->liked_users_count }}</span>
+                                <button type="submit" class="border-0 bg-transparent">
+
+                                    @if(auth()->user()->likedPosts->contains($post->id))
+                                        <i class="fas fa-heart"></i>
+                                    @else
+                                        <i class="far fa-heart"></i>
+                                    @endif
+                                    @endauth
+                                </button>
+                                @guest()
+                                    <div>
+                                        <span>{{ $post->liked_users_count }}</span>
+                                        <i class="fas fa-heart"></i>
+                                    </div>
+                                @endguest
+                        </form>
+                    </section>
                     <section class="comment-list mb-5">
                         @foreach($post->comments as $comment)
-                        <div class="comment-text mb-3">
+                            <div class="comment-text mb-3">
                             <span class="username">
                                 <div>
                                     {{$comment->user->name}}
                                 </div>
                             <span class="text-muted float-right">{{$comment->dateAsCarbon->diffForHumans()}}</span>
                             </span><!-- /.username -->
-                            {{$comment->message}}
-                        </div>
+                                {{$comment->message}}
+                            </div>
                         @endforeach
                     </section>
                     @auth()
-                    <section class="comment-section">
-                        <h2 class="section-title mb-5" data-aos="fade-up">Отправить комментарий</h2>
-                        <form action="{{route('post.comment.store', $post->id)}}" method="post">
-                            @csrf
-                            <div class="row">
-                                <div class="form-group col-12" data-aos="fade-up">
-                                    <label for="comment" class="sr-only">Comment</label>
-                                    <textarea name="message" id="comment" class="form-control" placeholder="Comment"
-                                              rows="10"></textarea>
-                                </div>
+                        <section class="comment-section">
+                            <h2 class="section-title mb-5" data-aos="fade-up">Отправить комментарий</h2>
+                            <form action="{{route('post.comment.store', $post->id)}}" method="post">
+                                @csrf
+                                <div class="row">
+                                    <div class="form-group col-12" data-aos="fade-up">
+                                        <label for="comment" class="sr-only">Comment</label>
+                                        <textarea name="message" id="comment" class="form-control" placeholder="Comment"
+                                                  rows="10"></textarea>
+                                    </div>
 
-                            </div>
-                            <div class="row">
-                                <div class="col-12" data-aos="fade-up">
-                                    <input type="submit" value="Отправить" class="btn btn-warning">
                                 </div>
-                            </div>
-                        </form>
-                    </section>
+                                <div class="row">
+                                    <div class="col-12" data-aos="fade-up">
+                                        <input type="submit" value="Отправить" class="btn btn-warning">
+                                    </div>
+                                </div>
+                            </form>
+                        </section>
                     @endauth
                 </div>
             </div>
